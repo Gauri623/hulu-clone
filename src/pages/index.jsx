@@ -1,10 +1,9 @@
-import Head from "next/head";
-import { Inter } from "next/font/google";
-import Header from "@/components/Header";
-import Nav from "@/components/Nav";
-import Results from "../components/Results";
 import { useEffect, useState } from "react";
+import Head from "next/head";
+
+import Results from "../components/Results";
 import requests from "../../utils/requests";
+import Nav from "@/components/Nav";
 
 export default function Home(props) {
   const [allData, setAllData] = useState();
@@ -37,9 +36,6 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Header */}
-      <Header />
-
       {/* Nav */}
       <Nav />
 
@@ -50,22 +46,11 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  // Get the query parameters from the context
   const { query } = context;
-
-  // Get the path from the request URL in the context
   const path = context.req.url;
-
-  // Make API request based on the query parameters (if needed)
-  const request = await fetch(
-    `https://api.themoviedb.org/3/trending/all/week?api_key=YOUR_API_KEY&language=en-US`
-  ).then((res) => {
-    return res.json();
-  });
 
   return {
     props: {
-      results: request,
       query, // Pass the query parameters as a prop
       path, // Pass the path as a prop
     },

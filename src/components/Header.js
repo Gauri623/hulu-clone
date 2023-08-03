@@ -1,7 +1,7 @@
 
 import Image from 'next/image'
 import HeaderItem from './HeaderItem';
-import { HomeIcon, BoltIcon, CheckIcon, RectangleStackIcon, MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/solid'
+import { HomeIcon, BoltIcon, CheckIcon, RectangleStackIcon, MagnifyingGlassIcon, UserIcon, StarIcon } from '@heroicons/react/24/solid'
 
 
 const Header = () => {
@@ -18,6 +18,7 @@ const Header = () => {
                     <HeaderItem title="COLLECTIONS" Icon={RectangleStackIcon} />
                     <HeaderItem title="SEARCH" Icon={MagnifyingGlassIcon} />
                     <HeaderItem title="ACCOUNT" Icon={UserIcon} />
+                    <HeaderItem title="PLANS" Icon={StarIcon} linkTo="plans" />
                 </div>
             </div>
 
