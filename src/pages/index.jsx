@@ -3,18 +3,19 @@ import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Nav from "@/components/Nav";
 import Results from "../components/Results";
-import requests from "../../utils/requests";
 import { useEffect, useState } from "react";
+import requests from "../../utils/requests";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home({ results }) {
+export default function Home(props) {
+  console.log(props?.query.genre, "results");
   const [allData, setAllData] = useState();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const genre = props?.query?.genre || "trending/all/week";
         const request = await fetch(
-          `https://api.themoviedb.org/3/trending/all/week?api_key=6e07dbaff15749ef8b6ce1d13d86f176&language=en-US`
+          `https://api.themoviedb.org/3${requests[genre]?.url}`
         ).then((res) => {
           return res.json();
         });
@@ -26,7 +27,9 @@ export default function Home({ results }) {
     };
 
     fetchData();
-  }, []);
+  }, [props?.query?.genre]);
+
+  console.log(allData, "results");
 
   return (
     <>
@@ -49,26 +52,25 @@ export default function Home({ results }) {
   );
 }
 
-export async function getServerProps(context) {
-  const genre = context.query.genre;
+export async function getServerSideProps(context) {
+  // Get the query parameters from the context
+  const { query } = context;
 
-  /* const request = await fetch(
-    `https://api.themoviedb.org/3${
-      requests[genre]?.url || requests.fetchTrending.url
-    }`
-  ).then((res) => {
-    console.log(res.json(), "INSIDE SERVER");
-    return res.json();
-  }); */
+  // Get the path from the request URL in the context
+  const path = context.req.url;
+
+  // Make API request based on the query parameters (if needed)
   const request = await fetch(
-    `https://api.themoviedb.org/3/trending/all/week?api_key=6e07dbaff15749ef8b6ce1d13d86f176&language=en-US`
+    `https://api.themoviedb.org/3/trending/all/week?api_key=YOUR_API_KEY&language=en-US`
   ).then((res) => {
     return res.json();
   });
 
   return {
     props: {
-      results: request.results,
+      results: request,
+      query, // Pass the query parameters as a prop
+      path, // Pass the path as a prop
     },
   };
 }

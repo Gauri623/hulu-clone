@@ -3,7 +3,6 @@ import { forwardRef } from "react";
 
 const Thumbnail = forwardRef(({ result }, ref) => {
   const BASE_URL = "https://image.tmdb.org/t/p/original";
-  console.log(result, "INSIDE THUMB");
   return (
     <div
       className="p-2 group cursor-pointer transition duration-0
