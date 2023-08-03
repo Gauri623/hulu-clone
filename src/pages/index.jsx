@@ -7,13 +7,12 @@ import { useEffect, useState } from "react";
 import requests from "../../utils/requests";
 
 export default function Home(props) {
-  console.log(props?.query.genre, "results");
   const [allData, setAllData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const genre = props?.query?.genre || "trending/all/week";
+        const genre = props?.query?.genre || "fetchTrending";
         const request = await fetch(
           `https://api.themoviedb.org/3${requests[genre]?.url}`
         ).then((res) => {
@@ -28,8 +27,6 @@ export default function Home(props) {
 
     fetchData();
   }, [props?.query?.genre]);
-
-  console.log(allData, "results");
 
   return (
     <>
