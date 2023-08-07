@@ -4,6 +4,13 @@ import PlansCard from "./plansCard";
 
 const Plans = () => {
   const [toggleState, setToggleState] = useState(1);
+  const tabData = [
+    { name: "Live Sports", key: "live" },
+    { name: "Breaking News", key: "breaking" },
+    { name: "Biggest Event", key: "biggest" },
+  ];
+  const [selectedTab, setselectedTab] = useState("live");
+  console.log(selectedTab, "TAB");
 
   const toggleTab = (index) => {
     console.log(index);
@@ -88,68 +95,169 @@ const Plans = () => {
           <div className="rotate-180"> ^ </div>
         </span>
       </div>
-
-      <div className="" onClick={() => toggleTab()}>
-        <div className="flex flex-col justify-start items-start max-w-md ">
-          <h2 className="mt-6 font-medium underline">Live Sports</h2>
-          <h1 className="mt-6 font-medium">Live Sports</h1>
-          <p className="mt-6">
-            Catch your games at home or on the go. Stream live games from major
-            college and pro leagues including the NCAA®, NBA, NHL, NFL, and
-            more.
-          </p>
-          <div className="flex flex-row gap-8 h-[55px] w-[55px] mt-5">
-            <img className=" rounded-full" src="/Images/small-1.png"></img>
-            <img className=" rounded-full" src="/Images/small-2.png"></img>
-            <img className=" rounded-full" src="/Images/small-3.png"></img>
-            <img className=" rounded-full" src="/Images/small-4.png"></img>
-          </div>
-          <span className="mt-6 max-w-3xl text-[10px]">
-            Live TV plan required. Regional restrictions, blackouts and
-            additional terms apply. <u>See details.</u>
-          </span>
+      <div className="w-full justify-around container">
+        <div className="flex justify-start w-full  items-center gap-9">
+          {tabData?.map((item, index) => {
+            return (
+              <button
+                key={index}
+                onClick={() => setselectedTab(item?.key)}
+                className={`px-px font-semibold text-white pb-4 ${
+                  selectedTab === item?.key && "border-b-4"
+                }`}
+              >
+                {item?.name}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      <div className="" onClick={() => toggleTab()}>
-        <div className="flex flex-col justify-start items-start max-w-md">
-          <h2 className="mt-6 font-medium underline">Breaking News</h2>
-          <h1 className="mt-6 font-medium "> Breaking News</h1>
-          <p className="mt-6">
-            Keep pace with what's going on locally and globally with trusted
-            opinions from all the top news networks.
-          </p>
-          <div className="flex flex-row gap-8 h-[55px] w-[55px] mt-5">
-            <img className=" rounded-full" src="/Images/abc-2.png"></img>
-            <img className=" rounded-full" src="/Images/abc-3.png"></img>
-            <img className=" rounded-full" src="/Images/abc-4.png"></img>
-            <img className=" rounded-full" src="/Images/abc-5.png"></img>
+      {selectedTab === "live" ? (
+        <div>
+          <div className=" flex flex-col justify-start items-start ml-40 absolute">
+            <h1 className="font-bold text-[50px]">Live Sports</h1>
+            <p className="mt-10 w-96">
+              Catch your games at home or on the go. Stream live games from
+              major college and pro leagues including the NCAA®, NBA, NHL, NFL,
+              and more.
+            </p>
+            <div className="flex flex-row gap-8 h-[55px] w-[55px] mt-6">
+              <img className=" rounded-full" src="/Images/small-1.png"></img>
+              <img className=" rounded-full" src="/Images/small-2.png"></img>
+              <img className=" rounded-full" src="/Images/small-3.png"></img>
+              <img className=" rounded-full" src="/Images/small-4.png"></img>
+            </div>
+            <span className=" max-w-3xl text-[10px] mt-5">
+              Live TV plan required. Regional restrictions, blackouts and
+              additional terms apply.<u>See details.</u>
+            </span>
           </div>
-          <span className="mt-6 max-w-3xl text-[10px]">
-            Live TV plan required. Regional restrictions, blackouts and
-            additional terms apply. <u>See details.</u>
-          </span>
+          <div>
+            <img
+              className="w-[1881px] h-[870px] flex-wrap"
+              src="Images/tab-image-2.jpg"
+            ></img>
+          </div>
         </div>
-      </div>
+      ) : selectedTab === "breaking" ? (
+        <div>
+          <div className="justify-start items-start ml-40  absolute">
+            <h1 className=" font-bold text-[50px]">Breaking News</h1>
+            <p className="mt-10 w-96">
+              Keep pace with what's going on locally and globally with trusted
+              opinions from all the top news networks.
+            </p>
+            <div className="flex flex-row gap-8 h-[55px] w-[55px] mt-5">
+              <img className=" rounded-full" src="/Images/abc-2.png"></img>
+              <img className=" rounded-full" src="/Images/abc-3.png"></img>
+              <img className=" rounded-full" src="/Images/abc-4.png"></img>
+              <img className=" rounded-full" src="/Images/abc-5.png"></img>
+            </div>
 
-      <div className="" onClick={() => toggleTab()}>
-        <div className="flex flex-col justify-start items-start max-w-md">
-          <h2 className="mt-6 font-medium underline">Biggest Event</h2>
-          <h1 className="mt-6 font-medium ">Biggest Event</h1>
-          <p className="mt-6">
-            Spectacular, can't-miss moments like the Olympics, Grammys®,
-            Oscars®, Emmys®, and more.
-          </p>
-          <div className="flex flex-row gap-8 h-[55px] w-[55px] mt-5">
-            <img className=" rounded-full" src="/Images/big-2.jpg"></img>
-            <img className=" rounded-full" src="/Images/big-3.jpg"></img>
-            <img className=" rounded-full" src="/Images/big-4.jpg"></img>
-            <img className=" rounded-full" src="/Images/big-1.jpg"></img>
+            <span className=" max-w-3xl text-[10px] mt-5">
+              Live TV plan required. Regional restrictions, blackouts and
+              additional terms apply. <u>See details.</u>
+            </span>
           </div>
-          <span className="mt-6 max-w-3xl text-[10px]">
-            Live TV plan required. Regional restrictions, blackouts and
-            additional terms apply. <u>See details.</u>
-          </span>
+
+          <div>
+            <img
+              className="w-[1881px] h-[870px] flex-wrap"
+              src="Images/tab-image-1.jpg"
+            ></img>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="justify-start items-start ml-40  absolute">
+            <h1 className=" font-bold text-[50px]">Biggest Event</h1>
+            <p className="mt-10 w-96">
+              Spectacular, can't-miss moments like the Olympics, Grammys®,
+              Oscars®, Emmys®, and more.
+            </p>
+            <div className="flex flex-row gap-8 h-[55px] w-[55px] mt-5">
+              <img className=" rounded-full" src="/Images/big-2.jpg"></img>
+              <img className=" rounded-full" src="/Images/big-3.jpg"></img>
+              <img className=" rounded-full" src="/Images/big-4.jpg"></img>
+              <img className=" rounded-full" src="/Images/big-1.jpg"></img>
+            </div>
+            <span className=" max-w-3xl text-[10px] mt-5">
+              Live TV plan required. Regional restrictions, blackouts and
+              additional terms apply. <u>See details.</u>
+            </span>
+          </div>
+          <div>
+            <img
+              className="w-[1881px] h-[870px] flex-wrap"
+              src="Images/tab-image-3.jpg"
+            ></img>
+          </div>
+        </div>
+      )}
+
+      <div className="bg-white h-[494px] w-[1902px]">
+        <div className="flex flex-row gap-28 ml-[281px] h-[332px] w-[1320px] justify-center items-center text-slate-400 mb-8">
+          <div>
+            <h2 className="font-bold text-stone-600">BROWSE</h2>
+            <h1 className="mt-1">Streaming Library</h1>
+            <h1 className="mt-1">Live TV</h1>
+            <h1 className="mt-1">Live News</h1>
+            <h1 className="mt-1">Live Sports</h1>
+          </div>
+          <div className="mt-20">
+            <h1 className="mt-1">TV Shows</h1>
+            <h1 className="mt-1">Originals</h1>
+            <h1 className="mt-1">Movies</h1>
+            <h1 className="mt-1">Networks</h1>
+            <h1 className="mt-1">Kids</h1>
+            <h1 className="mt-1">FX</h1>
+          </div>
+          <div className="mt-4">
+            <h1 className="mt-1">Max</h1>
+            <h1 className="mt-1">Cinemax</h1>
+            <h1 className="mt-1">Showtime</h1>
+            <h1 className="mt-1">STARZ</h1>
+          </div>
+          <div className="mt-10">
+            <h1 className="mt-1">Disney Bundle trio Basic</h1>
+            <h1 className="w-36 mt-1">Disney Bundle trio Premium</h1>
+            <h1 className="mt-1">Disney Bundle Duo Basic</h1>
+            <h1 className="mt-1">Student Discount</h1>
+          </div>
+          <div>
+            <h1 className="font-bold text-stone-600">HELP</h1>
+            <h1 className="mt-1">Account & Billing</h1>
+            <h1 className="mt-1">Plans & Pricing</h1>
+            <h1 className="mt-1">Supported Device</h1>
+            <h1 className="mt-1">Accessibility</h1>
+          </div>
+          <div>
+            <h1 className="font-bold text-stone-600">ABOUT US</h1>
+            <h1 className="mt-1">Shop hulu</h1>
+            <h1 className="mt-1">Press</h1>
+            <h1 className="mt-1">Jobs</h1>
+            <h1 className="mt-1">Contact</h1>
+          </div>
+        </div>
+        <div className="border-b-2 border-grey-400 w-[1320px] ml-72"></div>
+        <div className=" h-[494px] w-[1902px]">
+          <div className="h-[32px] w-[169px] flex flex-start gap-5 ml-80 mt-6">
+            <img className="h-[30px] w-[30px]" src="Images/fb.png"></img>
+            <img className="h-[30px] w-[30px]" src="Images/twitter.png"></img>
+            <img className="h-[30px] w-[30px]" src="Images/utube.png"></img>
+            <img className="h-[30px] w-[30px]" src="Images/insta.png"></img>
+          </div>
+
+          <div className="flex flex-row gap-16 text-slate-400 ml-80 mt-6 ">
+            <h2 className="text-[14px]">© 2023 Hulu, LLC</h2>
+            <h2 className="text-[14px]">About Ads</h2>
+            <h2 className="text-[14px]">Privacy Policy</h2>
+            <h2 className="text-[14px]">Do Not Sell My Personal Information</h2>
+            <h2 className="text-[14px]">Your California Privacy Rights</h2>
+            <h2 className="text-[14px]">TV Parental Guidelines</h2>
+            <h2 className="text-[14px]">Site map</h2>
+          </div>
         </div>
       </div>
     </div>
